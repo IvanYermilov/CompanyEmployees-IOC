@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.HttpOverrides;
+using SteamAchievements.Extensions;
 
 namespace SteamAchievements
 {
@@ -25,6 +27,8 @@ namespace SteamAchievements
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureCors();
+            services.ConfigureIISIntegration();
             services.AddControllers();
         }
 
@@ -37,6 +41,16 @@ namespace SteamAchievements
             }
 
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
+
+            app.UseCors("CorsPolicy");
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.All
+            });
+
 
             app.UseRouting();
 
