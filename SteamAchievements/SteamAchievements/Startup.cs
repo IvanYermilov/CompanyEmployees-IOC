@@ -8,19 +8,25 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.HttpOverrides;
+using NLog;
 using SteamAchievements.Extensions;
 
 namespace SteamAchievements
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(),
+                "/nlog.config"));
             Configuration = configuration;
         }
+
 
         public IConfiguration Configuration { get; }
 
@@ -29,6 +35,7 @@ namespace SteamAchievements
         {
             services.ConfigureCors();
             services.ConfigureIISIntegration();
+            services.ConfigureLoggerService();
             services.AddControllers();
         }
 
