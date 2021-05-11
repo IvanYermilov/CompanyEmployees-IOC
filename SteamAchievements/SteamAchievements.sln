@@ -4,12 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SteamAchievements", "SteamAchievements\SteamAchievements.csproj", "{55E3BB56-9CFA-4AC4-9AA4-6AC85BE6EFFE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{08655799-A2D7-4AA0-9083-74C5C94BBB1B} = {08655799-A2D7-4AA0-9083-74C5C94BBB1B}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{9098FDC5-E7C8-4AC8-8255-55AF5F2D0977}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "LoggerService\LoggerService.csproj", "{FB8D1D04-120C-4706-B9A4-CBB56E61C0E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{32095CF0-A21C-4C12-8E88-31E40A19C4EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{32095CF0-A21C-4C12-8E88-31E40A19C4EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{08655799-A2D7-4AA0-9083-74C5C94BBB1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +38,10 @@ Global
 		{32095CF0-A21C-4C12-8E88-31E40A19C4EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32095CF0-A21C-4C12-8E88-31E40A19C4EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32095CF0-A21C-4C12-8E88-31E40A19C4EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08655799-A2D7-4AA0-9083-74C5C94BBB1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08655799-A2D7-4AA0-9083-74C5C94BBB1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08655799-A2D7-4AA0-9083-74C5C94BBB1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08655799-A2D7-4AA0-9083-74C5C94BBB1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
