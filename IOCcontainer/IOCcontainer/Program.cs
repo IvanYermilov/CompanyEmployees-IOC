@@ -6,8 +6,9 @@ namespace IOCcontainer
     {
         static void Main(string[] args)
         {
-            Container.Add<IAsyncDisposable, MyClass>();
-            var registeredServices = Container.GetServices();
+            Container.Add<IDependency, MyClass>();
+            var inst =  Container.GetInterfaceImplementation<IDependency>();
+
         }
     }
 }

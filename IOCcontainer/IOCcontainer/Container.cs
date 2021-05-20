@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
+using System.Transactions;
 
 namespace IOCcontainer
 {
@@ -20,11 +25,22 @@ namespace IOCcontainer
             return services;
         }
 
-        private static T GetInstance<T>(Type classType)
+        private static T GetInstance<T>()
         {
-            var a = classType.GetConstructors();
-            T b = default; 
-            return b;
+            if (services.ContainsKey(typeof(T)))
+            {
+                var ctor = services[typeof(T)]
+                    .GetConstructors()
+                    .FirstOrDefault(_ => _.GetParameters().Length == 0);
+                return (T)ctor.Invoke(new Object[0]);
+            }
+            return default(T);
+        }
+
+        public static T GetInterfaceImplementation<T>()
+        {
+            if (services.ContainsKey(typeof(T))) return GetInstance<T>();
+            return default(T);
         }
     }
 

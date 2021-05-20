@@ -8,6 +8,12 @@ namespace IOCcontainer
     {
         private int a, b;
 
+        public MyClass()
+        {
+            a = 2;
+            b = 3;
+        }
+
         public MyClass(int a = 10, int b = 15)
         {
             this.a = a;
