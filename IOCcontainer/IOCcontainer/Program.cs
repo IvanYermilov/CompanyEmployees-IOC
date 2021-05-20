@@ -6,7 +6,8 @@ namespace IOCcontainer
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Container.Add<IAsyncDisposable, MyClass>();
+            var registeredServices = Container.GetServices();
         }
     }
 }

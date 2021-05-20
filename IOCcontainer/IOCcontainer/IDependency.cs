@@ -4,7 +4,8 @@ using System.Text;
 
 namespace IOCcontainer
 {
-    interface Interface1
+    interface IDependency
     {
-        
+        public int Sum();
+    }
 }
