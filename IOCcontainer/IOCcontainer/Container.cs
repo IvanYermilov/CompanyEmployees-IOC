@@ -27,14 +27,10 @@ namespace IOCcontainer
 
         private static T GetInstance<T>()
         {
-            if (services.ContainsKey(typeof(T)))
-            {
-                var ctor = services[typeof(T)]
+            var ctor = services[typeof(T)]
                     .GetConstructors()
                     .FirstOrDefault(_ => _.GetParameters().Length == 0);
-                return (T)ctor.Invoke(new Object[0]);
-            }
-            return default(T);
+            return (T)ctor.Invoke(new Object[0]);
         }
 
         public static T GetInterfaceImplementation<T>()
