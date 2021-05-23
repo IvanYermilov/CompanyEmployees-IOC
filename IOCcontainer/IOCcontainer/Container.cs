@@ -17,7 +17,13 @@ namespace IOCcontainer
         {
             Type interfaceType = typeof(TI);
             Type classType = typeof(TC);
-            services.Add(interfaceType, classType);
+            if (interfaceType.IsInterface) services.Add(interfaceType, classType);
+            else if (interfaceType.IsClass)
+            {
+                if (CheckClass(interfaceType)) services.Add(interfaceType, classType);
+                else throw new Exception("First parameter is class and has unregistered interface");
+            }
+            else throw new Exception("First parameter is not class or interface");
         }
 
         public static Dictionary<Type, Type> GetServices()
@@ -27,16 +33,39 @@ namespace IOCcontainer
 
         private static T GetInstance<T>()
         {
-            var ctor = services[typeof(T)]
+            if (typeof(T).IsInterface)
+            {
+                var interfaceCtor = services[typeof(T)]
                     .GetConstructors()
                     .FirstOrDefault(_ => _.GetParameters().Length == 0);
-            return (T)ctor.Invoke(new Object[0]);
+                return (T) interfaceCtor.Invoke(new Object[0]);
+            }
+
+            var classCtor = services[typeof(T)]
+                .GetConstructors()
+                .FirstOrDefault(_ => _.GetParameters().Length == 1);
+            var parameterType = classCtor.GetParameters().First().ParameterType;
+
+            var containerType = typeof(Container);
+            var methodInfo = containerType.GetMethod("GetInstance", BindingFlags.Static | BindingFlags.NonPublic);
+            MethodInfo genericMethodInfo = methodInfo.MakeGenericMethod(parameterType);
+            var interfaceInstance = genericMethodInfo.Invoke(null, null);
+            return (T) classCtor.Invoke(new object[] {interfaceInstance});
         }
 
-        public static T GetInterfaceImplementation<T>()
+        public static T GetImplementation<T>()
         {
             if (services.ContainsKey(typeof(T))) return GetInstance<T>();
             return default(T);
+        }
+
+        private static bool CheckClass(Type classType)
+        {
+            var ctor = classType
+                .GetConstructors()
+                .FirstOrDefault(_ => _.GetParameters().Length == 1 &&
+                                     services.ContainsKey(_.GetParameters().First().ParameterType));
+            return ctor != null;
         }
     }
 
