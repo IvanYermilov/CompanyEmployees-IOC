@@ -4,11 +4,11 @@ using System.Text;
 
 namespace IOCcontainer
 {
-    class MyAnotherClass
+    class MyClass2
     {
-        public IDependency I;
+        public IDependency1 I;
 
-        public MyAnotherClass(IDependency iDependency)
+        public MyClass2(IDependency1 iDependency)
         {
             I = iDependency;
         }
