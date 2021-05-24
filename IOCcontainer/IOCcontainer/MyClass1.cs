@@ -4,17 +4,17 @@ using System.Text;
 
 namespace IOCcontainer
 {
-    class MyClass : IDependency
+    class MyClass1 : IDependency1
     {
         private int a, b;
 
-        public MyClass()
+        public MyClass1()
         {
             a = 2;
             b = 3;
         }
 
-        public MyClass(int a = 10, int b = 15)
+        public MyClass1(int a = 10, int b = 15)
         {
             this.a = a;
             this.b = b;

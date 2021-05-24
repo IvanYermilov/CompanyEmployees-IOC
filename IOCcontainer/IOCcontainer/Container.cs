@@ -13,44 +13,46 @@ namespace IOCcontainer
     {
         static public Dictionary<Type, Type> services = new Dictionary<Type, Type>();
 
-        public static void Add<TI, TC>()
+        public static void Add<TA, TI>()
         {
-            Type interfaceType = typeof(TI);
-            Type classType = typeof(TC);
-            if (interfaceType.IsInterface) services.Add(interfaceType, classType);
-            else if (interfaceType.IsClass)
-            {
-                if (CheckClass(interfaceType)) services.Add(interfaceType, classType);
-                else throw new Exception("First parameter is class and has unregistered interface");
-            }
-            else throw new Exception("First parameter is not class or interface");
-        }
-
-        public static Dictionary<Type, Type> GetServices()
-        {
-            return services;
+            Type abstractionType = typeof(TA);
+            Type implementationType = typeof(TI);
+            services.Add(abstractionType, implementationType);
         }
 
         private static T GetInstance<T>()
         {
-            if (typeof(T).IsInterface)
+            List<object> parameters = new List<object>();
+            ConstructorInfo classCtor;
+            if (services.ContainsKey(typeof(T)))
             {
-                var interfaceCtor = services[typeof(T)]
+                classCtor = services[typeof(T)]
                     .GetConstructors()
-                    .FirstOrDefault(_ => _.GetParameters().Length == 0);
-                return (T) interfaceCtor.Invoke(new Object[0]);
+                    .FirstOrDefault();
+            }
+            else
+            {
+                classCtor = typeof(T)
+                    .GetConstructors()
+                    .FirstOrDefault();
             }
 
-            var classCtor = services[typeof(T)]
-                .GetConstructors()
-                .FirstOrDefault(_ => _.GetParameters().Length == 1);
-            var parameterType = classCtor.GetParameters().First().ParameterType;
 
-            var containerType = typeof(Container);
-            var methodInfo = containerType.GetMethod("GetInstance", BindingFlags.Static | BindingFlags.NonPublic);
-            MethodInfo genericMethodInfo = methodInfo.MakeGenericMethod(parameterType);
-            var interfaceInstance = genericMethodInfo.Invoke(null, null);
-            return (T) classCtor.Invoke(new object[] {interfaceInstance});
+            var ctorParams = classCtor.GetParameters();
+
+            foreach (var param in ctorParams)
+            {
+                if (!services.ContainsKey(param.ParameterType)) return default;
+                var parameterType = services[param.ParameterType];
+                var containerType = typeof(Container);
+                var methodInfo = containerType.GetMethod("GetInstance", BindingFlags.Static | BindingFlags.NonPublic);
+                MethodInfo genericMethodInfo = methodInfo.MakeGenericMethod(parameterType);
+                parameters.Add(genericMethodInfo.Invoke(null, null));
+            }
+
+ 
+
+            return (T) classCtor.Invoke(parameters.ToArray());
         }
 
         public static T GetImplementation<T>()
@@ -59,14 +61,12 @@ namespace IOCcontainer
             return default(T);
         }
 
-        private static bool CheckClass(Type classType)
-        {
-            var ctor = classType
-                .GetConstructors()
-                .FirstOrDefault(_ => _.GetParameters().Length == 1 &&
-                                     services.ContainsKey(_.GetParameters().First().ParameterType));
-            return ctor != null;
-        }
+        //private static bool CheckClass(Type classType)
+        //{
+        //    var ctorParams = classType
+
+        //    return true;
+        //}
     }
 
 }

@@ -6,17 +6,12 @@ namespace IOCcontainer
     {
         static void Main(string[] args)
         {
-            try
-            {
-                Container.Add<IDependency, MyClass>();
-                Container.Add<MyAnotherClass, MyAnotherClass>();
-                var inst1 = Container.GetImplementation<IDependency>();
-                var inst2 = Container.GetImplementation<MyAnotherClass>();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            Container.Add<IDependency3, MyClass3>();
+            Container.Add<IDependency1, MyClass1>();
+            Container.Add<MyClass2, MyClass2>();
+            var inst1 = Container.GetImplementation<IDependency3>();
+            var inst2 = Container.GetImplementation<IDependency1>();
+            var inst3 = Container.GetImplementation<MyClass2>();
         }
     }
 }
