@@ -36,8 +36,6 @@ namespace IOCcontainer
                     .GetConstructors()
                     .FirstOrDefault();
             }
-
-
             var ctorParams = classCtor.GetParameters();
 
             foreach (var param in ctorParams)
@@ -50,8 +48,6 @@ namespace IOCcontainer
                 parameters.Add(genericMethodInfo.Invoke(null, null));
             }
 
- 
-
             return (T) classCtor.Invoke(parameters.ToArray());
         }
 
@@ -60,14 +56,6 @@ namespace IOCcontainer
             if (services.ContainsKey(typeof(T))) return GetInstance<T>();
             return default(T);
         }
-
-        //private static bool CheckClass(Type classType)
-        //{
-        //    var ctorParams = classType
-
-        //    return true;
-        //}
     }
-
 }
  

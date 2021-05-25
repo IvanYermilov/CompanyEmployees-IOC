@@ -8,7 +8,7 @@ namespace IOCcontainer
         {
             Container.Add<IDependency3, MyClass3>();
             Container.Add<IDependency1, MyClass1>();
-            //Container.Add<MyClass2, MyClass2>();
+            Container.Add<MyClass2, MyClass2>();
             Container.Add<MyClass4, MyClass4>();
             var inst1 = Container.GetImplementation<IDependency3>();
             var inst2 = Container.GetImplementation<IDependency1>();
