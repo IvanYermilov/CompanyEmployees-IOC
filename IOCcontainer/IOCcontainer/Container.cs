@@ -30,12 +30,13 @@ namespace IOCcontainer
                     .GetConstructors()
                     .FirstOrDefault();
             }
-            else
+            else if (services.ContainsValue(typeof(T)))
             {
                 classCtor = typeof(T)
                     .GetConstructors()
                     .FirstOrDefault();
             }
+            else return default;
             var ctorParams = classCtor.GetParameters();
 
             foreach (var param in ctorParams)
