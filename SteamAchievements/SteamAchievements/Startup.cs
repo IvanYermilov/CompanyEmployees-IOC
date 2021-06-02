@@ -46,7 +46,7 @@ namespace SteamAchievements
             {
                 config.RespectBrowserAcceptHeader = true;
                 config.ReturnHttpNotAcceptable = true;
-            }).AddXmlDataContractSerializerFormatters();
+            }).AddXmlDataContractSerializerFormatters().AddCustomCSVFormatter();
 
         }
 
