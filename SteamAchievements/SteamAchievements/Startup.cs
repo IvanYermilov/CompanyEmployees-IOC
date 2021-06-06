@@ -39,7 +39,10 @@ namespace SteamAchievements
             services.ConfigureLoggerService();
             services.ConfigureRepositoryManager();
             services.AddControllers();
-
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
             services.ConfigureSqlContext(Configuration);
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers(config =>
