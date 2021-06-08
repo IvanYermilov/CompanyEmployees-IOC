@@ -8,6 +8,7 @@ using Entities.DataTransferObjects;
 using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using SteamAchievements.ModelBinders;
+using System.Threading.Tasks;
 
 namespace SteamAchievements.Controllers
 {
@@ -28,17 +29,17 @@ namespace SteamAchievements.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetCompanies()
+        public async Task<IActionResult> GetCompanies()
         {
-            var companies = _repository.Company.GetAllCompanies(trackChanges: false);
+            var companies = await _repository.Company.GetAllCompaniesAsync(trackChanges: false);
             var companiesDto = _mapper.Map<IEnumerable<CompanyDto>>(companies);
             return Ok(companiesDto);
         }
 
         [HttpGet("{id}", Name = "CompanyById")]
-        public IActionResult GetCompany(Guid id)
+        public async Task<IActionResult> GetCompany(Guid id)
         {
-            var company = _repository.Company.GetCompany(id, trackChanges: false);
+            var company = await _repository.Company.GetCompanyAsync(id, trackChanges: false);
             if (company == null)
             {
                 _logger.LogInfo($"Company with id: {id} doesn't exist in the database.");
@@ -53,7 +54,7 @@ namespace SteamAchievements.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateCompany([FromBody] CompanyForCreationDto company)
+        public async Task<IActionResult> CreateCompany([FromBody] CompanyForCreationDto company)
         {
             if (company == null)
             {
@@ -70,7 +71,7 @@ namespace SteamAchievements.Controllers
             var companyEntity = _mapper.Map<Company>(company);
 
             _repository.Company.CreateCompany(companyEntity);
-            _repository.Save();
+            await _repository.SaveAsync();
 
             var companyToReturn = _mapper.Map<CompanyDto>(companyEntity);
 
@@ -78,7 +79,9 @@ namespace SteamAchievements.Controllers
         }
 
         [HttpGet("collection/({ids})", Name = "CompanyCollection")]
-        public IActionResult GetCompanyCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))]IEnumerable<Guid> ids)
+        public async Task<IActionResult> GetCompanyCollection([ModelBinder(BinderType = 
+            typeof(ArrayModelBinder))]IEnumerable<Guid> ids)
+
         {
             if (ids == null)
             {
@@ -86,7 +89,7 @@ namespace SteamAchievements.Controllers
                 return BadRequest("Parameter ids is null");
             }
 
-            var companyEntities = _repository.Company.GetByIds(ids, trackChanges: false);
+            var companyEntities = await _repository.Company.GetByIdsAsync(ids, trackChanges: false);
 
             if (ids.Count() != companyEntities.Count())
             {
@@ -99,7 +102,7 @@ namespace SteamAchievements.Controllers
         }
 
         [HttpPost("collection")]
-        public IActionResult CreateCompanyCollection([FromBody]IEnumerable<CompanyForCreationDto> companyCollection)
+        public async Task<IActionResult> CreateCompanyCollection([FromBody]IEnumerable<CompanyForCreationDto> companyCollection)
         {
             if (companyCollection == null)
             {
@@ -109,7 +112,7 @@ namespace SteamAchievements.Controllers
 
             if (!ModelState.IsValid)
             {
-                _logger.LogError("Invalid model state for the CompanyForCreationDto object");
+                _logger.LogError("Invalid model state for the EmployeeForUpdateDto object");
                 return UnprocessableEntity(ModelState);
             }
 
@@ -119,7 +122,7 @@ namespace SteamAchievements.Controllers
                 _repository.Company.CreateCompany(company);
             }
 
-            _repository.Save();
+            await _repository.SaveAsync();
 
             var companyCollectionToReturn = _mapper.Map<IEnumerable<CompanyDto>>(companyEntities);
             var ids = string.Join(",", companyCollectionToReturn.Select(c => c.Id));
@@ -128,9 +131,9 @@ namespace SteamAchievements.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteCompany(Guid id)
+        public async Task<IActionResult> DeleteCompany(Guid id)
         {
-            var company = _repository.Company.GetCompany(id, trackChanges: false);
+            var company = await _repository.Company.GetCompanyAsync(id, trackChanges: false);
             if (company == null)
             {
                 _logger.LogInfo($"Company with id: {id} doesn't exist in the database.");
@@ -138,13 +141,14 @@ namespace SteamAchievements.Controllers
             }
 
             _repository.Company.DeleteCompany(company);
-            _repository.Save();
+           await _repository.SaveAsync();
 
             return NoContent();
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateCompany(Guid id, [FromBody] CompanyForUpdateDto company)
+        public async Task<IActionResult> UpdateCompany(Guid id, [FromBody] CompanyForUpdateDto company)
+
         {
             if (company == null)
             {
@@ -158,7 +162,7 @@ namespace SteamAchievements.Controllers
                 return UnprocessableEntity(ModelState);
             }
 
-            var companyEntity = _repository.Company.GetCompany(id, trackChanges: true);
+            var companyEntity = await _repository.Company.GetCompanyAsync(id, trackChanges: true);
             if (companyEntity == null)
             {
                 _logger.LogInfo($"Company with id: {id} doesn't exist in the database.");
@@ -166,7 +170,7 @@ namespace SteamAchievements.Controllers
             }
 
             _mapper.Map(company, companyEntity);
-            _repository.Save();
+            await _repository.SaveAsync();
 
             return NoContent();
         }
