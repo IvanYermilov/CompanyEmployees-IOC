@@ -15,6 +15,7 @@ using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 using SteamAchievements.Extensions;
+using SteamAchievements.ActionFilters;
 
 namespace SteamAchievements
 {
@@ -52,7 +53,10 @@ namespace SteamAchievements
             }).AddNewtonsoftJson()
                 .AddXmlDataContractSerializerFormatters()
                 .AddCustomCSVFormatter();
-
+            services.AddScoped<ValidationFilterAttribute>();
+            services.AddScoped<ValidateCompanyExistsAttribute>();
+            services.AddScoped<ValidateEmployeeForCompanyExistsAttribute>();
+            services.AddScoped<ValidateCompanyForEmployeeExistsAttribute>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
