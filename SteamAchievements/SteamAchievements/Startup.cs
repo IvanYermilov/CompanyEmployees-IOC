@@ -12,8 +12,10 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts;
+using Entities.DataTransferObjects;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
+using Repository.DataShaping;
 using SteamAchievements.Extensions;
 using SteamAchievements.ActionFilters;
 
@@ -57,6 +59,8 @@ namespace SteamAchievements
             services.AddScoped<ValidateCompanyExistsAttribute>();
             services.AddScoped<ValidateEmployeeForCompanyExistsAttribute>();
             services.AddScoped<ValidateCompanyForEmployeeExistsAttribute>();
+            services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
