@@ -58,6 +58,9 @@ namespace SteamAchievements.Extensions
                     newtonsoftJsonOutputFormatter
                       .SupportedMediaTypes
                       .Add("application/vnd.kek.hateoas+json");
+                    newtonsoftJsonOutputFormatter
+                      .SupportedMediaTypes
+                      .Add("application/vnd.kek.apiroot+json");
                 }
 
                 var xmlOutputFormatter = config.OutputFormatters
@@ -68,6 +71,9 @@ namespace SteamAchievements.Extensions
                     xmlOutputFormatter
                       .SupportedMediaTypes
                       .Add("application/vnd.kek.hateoas+xml");
+                    xmlOutputFormatter
+                      .SupportedMediaTypes
+                      .Add("application/vnd.kek.apiroot+xml");
                 }
             });
         }
