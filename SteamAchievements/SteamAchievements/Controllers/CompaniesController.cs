@@ -13,6 +13,7 @@ using SteamAchievements.ActionFilters;
 
 namespace SteamAchievements.Controllers
 {
+    [ApiVersion("1.0")]
     [Route("api/companies")]
     [ApiController]
     public class CompaniesController : ControllerBase
@@ -149,6 +150,5 @@ namespace SteamAchievements.Controllers
 
             return Ok();
         }
-
     }
 }
