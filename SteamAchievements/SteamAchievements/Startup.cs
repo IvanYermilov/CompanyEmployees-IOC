@@ -46,6 +46,10 @@ namespace SteamAchievements
             {
                 config.RespectBrowserAcceptHeader = true;
                 config.ReturnHttpNotAcceptable = true;
+                config.CacheProfiles.Add("120SecondsDuration", new CacheProfile
+                {
+                    Duration = 120
+                });
             }).AddNewtonsoftJson()
                 .AddXmlDataContractSerializerFormatters()
                 .AddCustomCSVFormatter();
@@ -58,6 +62,7 @@ namespace SteamAchievements
             services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
             services.AddScoped<EmployeeLinks>();
             services.ConfigureVersioning();
+            services.ConfigureResponseCaching();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,6 +90,7 @@ namespace SteamAchievements
                 ForwardedHeaders = ForwardedHeaders.All
             });
 
+            app.UseResponseCaching();
 
             app.UseRouting();
 
