@@ -9,6 +9,7 @@ using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using SteamAchievements.ModelBinders;
 using System.Threading.Tasks;
+using Marvin.Cache.Headers;
 using SteamAchievements.ActionFilters;
 
 namespace SteamAchievements.Controllers
@@ -16,7 +17,7 @@ namespace SteamAchievements.Controllers
     [ApiVersion("1.0")]
     [Route("api/companies")]
     [ApiController]
-    [ResponseCache(CacheProfileName = "120SecondsDuration")]
+    //[ResponseCache(CacheProfileName = "120SecondsDuration")]
     public class CompaniesController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
@@ -32,6 +33,8 @@ namespace SteamAchievements.Controllers
         }
 
         [HttpGet(Name = "GetCompanies")]
+        [HttpCacheExpiration(CacheLocation = CacheLocation.Public, MaxAge = 5)]
+        [HttpCacheValidation(MustRevalidate = false)]
         public async Task<IActionResult> GetCompanies()
         {
             var companies = await _repository.Company.GetAllCompaniesAsync(trackChanges: false);
@@ -40,6 +43,8 @@ namespace SteamAchievements.Controllers
         }
 
         [HttpGet("{id}", Name = "CompanyById")]
+        [HttpCacheExpiration(CacheLocation = CacheLocation.Public, MaxAge = 5)]
+        [HttpCacheValidation(MustRevalidate = false)]
         public async Task<IActionResult> GetCompany(Guid id)
         {
             var company = await _repository.Company.GetCompanyAsync(id, trackChanges: false);

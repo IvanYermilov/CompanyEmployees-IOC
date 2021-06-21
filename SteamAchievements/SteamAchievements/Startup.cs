@@ -63,6 +63,8 @@ namespace SteamAchievements
             services.AddScoped<EmployeeLinks>();
             services.ConfigureVersioning();
             services.ConfigureResponseCaching();
+            services.ConfigureHttpCacheHeaders();
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,6 +93,8 @@ namespace SteamAchievements
             });
 
             app.UseResponseCaching();
+
+            app.UseHttpCacheHeaders();
 
             app.UseRouting();
 
