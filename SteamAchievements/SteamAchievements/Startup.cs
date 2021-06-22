@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using Contracts;
 using Entities.DataTransferObjects;
 using Microsoft.AspNetCore.Builder;
@@ -64,6 +65,9 @@ namespace SteamAchievements
             services.ConfigureVersioning();
             services.ConfigureResponseCaching();
             services.ConfigureHttpCacheHeaders();
+            services.AddMemoryCache();
+            services.AddInMemoryRateLimiting();
+            services.ConfigureRateLimitingOptions();
             services.AddHttpContextAccessor();
         }
 
@@ -95,6 +99,8 @@ namespace SteamAchievements
             app.UseResponseCaching();
 
             app.UseHttpCacheHeaders();
+
+            app.UseIpRateLimiting();
 
             app.UseRouting();
 
