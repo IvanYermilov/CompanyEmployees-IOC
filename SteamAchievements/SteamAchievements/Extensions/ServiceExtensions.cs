@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Repository;
 using System.Collections.Generic;
 using System.Linq;
+using Entities.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace SteamAchievements.Extensions
 {
@@ -110,7 +112,7 @@ namespace SteamAchievements.Extensions
                 new RateLimitRule
                 {
                     Endpoint = "*",
-                    Limit= 3,
+                    Limit= 50,
                     Period = "5m"
                 }
             };
@@ -124,5 +126,22 @@ namespace SteamAchievements.Extensions
             services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
             services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
         }
+
+        public static void ConfigureIdentity(this IServiceCollection services)
+        {
+            var builder = services.AddIdentityCore<User>(o =>
+            {
+                o.Password.RequireDigit = true;
+                o.Password.RequireLowercase = false;
+                o.Password.RequireUppercase = false;
+                o.Password.RequireNonAlphanumeric = false;
+                o.Password.RequiredLength = 10;
+                o.User.RequireUniqueEmail = true;
+            });
+
+            builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
+            builder.AddEntityFrameworkStores<RepositoryContext>().AddDefaultTokenProviders();
+        }
+
     }
 }
