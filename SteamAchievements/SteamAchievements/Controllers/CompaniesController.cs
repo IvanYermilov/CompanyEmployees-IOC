@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using SteamAchievements.ModelBinders;
 using System.Threading.Tasks;
 using Marvin.Cache.Headers;
+using Microsoft.AspNetCore.Authorization;
 using SteamAchievements.ActionFilters;
 
 namespace SteamAchievements.Controllers
@@ -32,7 +33,7 @@ namespace SteamAchievements.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet(Name = "GetCompanies")]
+        [HttpGet(Name = "GetCompanies"), Authorize]
         [HttpCacheExpiration(CacheLocation = CacheLocation.Public, MaxAge = 5)]
         [HttpCacheValidation(MustRevalidate = false)]
         public async Task<IActionResult> GetCompanies()
