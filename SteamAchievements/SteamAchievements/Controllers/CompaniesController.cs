@@ -33,7 +33,7 @@ namespace SteamAchievements.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet(Name = "GetCompanies"), Authorize]
+        [HttpGet(Name = "GetCompanies"), Authorize(Roles = "Manager")]
         [HttpCacheExpiration(CacheLocation = CacheLocation.Public, MaxAge = 5)]
         [HttpCacheValidation(MustRevalidate = false)]
         public async Task<IActionResult> GetCompanies()
