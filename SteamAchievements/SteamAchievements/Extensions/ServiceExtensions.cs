@@ -183,10 +183,36 @@ namespace SteamAchievements.Extensions
                     Title = "Steam Achievements API",
                     Version = "v1"
                 });
+
                 s.SwaggerDoc("v2", new OpenApiInfo
                 {
                     Title = "Steam Achievements API",
                     Version = "v2"
+                });
+
+                s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Place to add JWT with Bearer",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                s.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                            },
+                            Name = "Bearer",
+                        },
+                        new List<string>()
+                    }
                 });
             });
         }
