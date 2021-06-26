@@ -13,7 +13,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repository;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Entities.Models;
 using Microsoft.AspNetCore.Identity;
@@ -181,7 +183,20 @@ namespace SteamAchievements.Extensions
                 s.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Steam Achievements API",
-                    Version = "v1"
+                    Version = "v1",
+                    Description = "SteamAchievements API",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "John Doe",
+                        Email = "John.Doe@gmail.com",
+                        Url = new Uri("https://twitter.com/johndoe"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "SteamAchievements API LICX",
+                        Url = new Uri("https://example.com/license"),
+                    }
                 });
 
                 s.SwaggerDoc("v2", new OpenApiInfo
@@ -189,6 +204,11 @@ namespace SteamAchievements.Extensions
                     Title = "Steam Achievements API",
                     Version = "v2"
                 });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                s.IncludeXmlComments(xmlPath);
+
 
                 s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
