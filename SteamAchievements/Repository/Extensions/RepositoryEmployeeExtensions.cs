@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Reflection;
 using System.Text;
-using SteamAchievements.Extensions.Utility;
+using CompanyEmployees.Extensions.Utility;
 
 namespace Repository.Extensions
 {

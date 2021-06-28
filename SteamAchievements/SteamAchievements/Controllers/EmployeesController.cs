@@ -8,12 +8,12 @@ using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
-using SteamAchievements.ActionFilters;
+using CompanyEmployees.ActionFilters;
 using Entities.RequestFeatures;
 using Newtonsoft.Json;
-using SteamAchievements.Utility;
+using CompanyEmployees.Utility;
 
-namespace SteamAchievements.Controllers
+namespace CompanyEmployees.Controllers
 {
     [Route("api/companies/{companyId}/employees")]
     [ApiController]

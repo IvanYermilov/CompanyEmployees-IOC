@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "SteamAchievements": {
+    "CompanyEmployees": {
       "commandName": "Project",
       "launchBrowser": false,
       "launchUrl": "weatherforecast",

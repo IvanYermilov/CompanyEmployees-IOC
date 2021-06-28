@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteamAchievements.Extensions.Utility
+namespace CompanyEmployees.Extensions.Utility
 {
     public static class OrderQueryBuilder
     {

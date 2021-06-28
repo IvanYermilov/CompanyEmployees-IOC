@@ -7,13 +7,13 @@ using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
-using SteamAchievements.ModelBinders;
+using CompanyEmployees.ModelBinders;
 using System.Threading.Tasks;
 using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Authorization;
-using SteamAchievements.ActionFilters;
+using CompanyEmployees.ActionFilters;
 
-namespace SteamAchievements.Controllers
+namespace CompanyEmployees.Controllers
 {
     [ApiVersion("1.0")]
     [Route("api/companies")]

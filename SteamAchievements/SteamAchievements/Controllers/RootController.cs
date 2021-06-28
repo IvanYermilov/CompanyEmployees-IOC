@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SteamAchievements.Controllers
+namespace CompanyEmployees.Controllers
 {
     [Route("api")]
     [ApiController]

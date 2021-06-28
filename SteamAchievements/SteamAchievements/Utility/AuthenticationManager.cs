@@ -11,7 +11,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteamAchievements.Utility
+namespace CompanyEmployees.Utility
 {
     public class AuthenticationManager : IAuthenticationManager
     {

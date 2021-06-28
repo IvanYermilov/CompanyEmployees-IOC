@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace SteamAchievements.Migrations
+namespace CompanyEmployees.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
     [Migration("20210622171442_CreatingIdentityTables")]

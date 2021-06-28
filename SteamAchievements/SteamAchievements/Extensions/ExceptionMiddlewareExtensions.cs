@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 
-namespace SteamAchievements.Extensions
+namespace CompanyEmployees.Extensions
 {
     public static class ExceptionMiddlewareExtensions
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SteamAchievements.Controllers
+namespace CompanyEmployees.Controllers
 {
     [ApiVersion("2.0", Deprecated = true)]
     [Route("api/companies")]

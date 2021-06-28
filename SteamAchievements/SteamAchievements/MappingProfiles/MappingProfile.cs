@@ -6,7 +6,7 @@ using AutoMapper;
 using Entities.DataTransferObjects;
 using Entities.Models;
 
-namespace SteamAchievements.MappingProfiles
+namespace CompanyEmployees.MappingProfiles
 {
     public class MappingProfile : Profile
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace SteamAchievements
+namespace CompanyEmployees
 {
     public class WeatherForecast
     {

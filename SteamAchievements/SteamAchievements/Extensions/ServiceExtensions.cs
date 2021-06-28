@@ -23,7 +23,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 
-namespace SteamAchievements.Extensions
+namespace CompanyEmployees.Extensions
 {
     public static class ServiceExtensions
     {
@@ -46,7 +46,7 @@ namespace SteamAchievements.Extensions
             IConfiguration configuration) =>
             services.AddDbContext<RepositoryContext>(opts =>
             opts.UseSqlServer(configuration.GetConnectionString("sqlConnection"), b =>
-                b.MigrationsAssembly("SteamAchievements")));
+                b.MigrationsAssembly("CompanyEmployees")));
 
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
             services.AddScoped<IRepositoryManager, RepositoryManager>();
@@ -184,7 +184,7 @@ namespace SteamAchievements.Extensions
                 {
                     Title = "Steam Achievements API",
                     Version = "v1",
-                    Description = "SteamAchievements API",
+                    Description = "CompanyEmployees API",
                     TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new OpenApiContact
                     {
@@ -194,7 +194,7 @@ namespace SteamAchievements.Extensions
                     },
                     License = new OpenApiLicense
                     {
-                        Name = "SteamAchievements API LICX",
+                        Name = "CompanyEmployees API LICX",
                         Url = new Uri("https://example.com/license"),
                     }
                 });

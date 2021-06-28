@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\johns\source\repos\MyRep\SteamAchievements\SteamAchievements\SteamAchievements.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\johns\source\repos\MyRep\CompanyEmployees\CompanyEmployees\CompanyEmployees.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
 
@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="SteamAchievements.xml">
+    <None Update="CompanyEmployees.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

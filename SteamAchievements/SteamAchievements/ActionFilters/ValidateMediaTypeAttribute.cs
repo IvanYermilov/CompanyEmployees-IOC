@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Net.Http.Headers;
 using System.Linq;
 
-namespace SteamAchievements.ActionFilters
+namespace CompanyEmployees.ActionFilters
 {
     public class ValidateMediaTypeAttribute : IActionFilter
     {

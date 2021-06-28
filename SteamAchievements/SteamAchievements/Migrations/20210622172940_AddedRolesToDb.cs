@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SteamAchievements.Migrations
+namespace CompanyEmployees.Migrations
 {
     public partial class AddedRolesToDb : Migration
     {

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 
-namespace SteamAchievements
+namespace CompanyEmployees
 {
     public class CsvOutputFormatter : TextOutputFormatter
     {

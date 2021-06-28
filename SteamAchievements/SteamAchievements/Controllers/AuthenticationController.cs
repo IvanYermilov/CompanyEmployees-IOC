@@ -8,9 +8,9 @@ using Entities.DataTransferObjects;
 using Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SteamAchievements.ActionFilters;
+using CompanyEmployees.ActionFilters;
 
-namespace SteamAchievements.Controllers
+namespace CompanyEmployees.Controllers
 {
     [Route("api/authentication")]
     [ApiController]

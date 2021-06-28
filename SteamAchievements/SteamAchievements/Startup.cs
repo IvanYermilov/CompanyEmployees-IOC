@@ -10,12 +10,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog;
 using Repository.DataShaping;
-using SteamAchievements.ActionFilters;
-using SteamAchievements.Extensions;
-using SteamAchievements.Utility;
+using CompanyEmployees.ActionFilters;
+using CompanyEmployees.Extensions;
+using CompanyEmployees.Utility;
 using System.IO;
 
-namespace SteamAchievements
+namespace CompanyEmployees
 {
     public class Startup
     {
